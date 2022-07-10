@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <title>Query Table</title>
+    </head>
+    <body>
+        <h2>Search results</h2>
+
+        <div>
+            <table>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th scope="col">patient_id</th>
+                    <th scope="col">patient_first_name</th>
+                    <th scope="col">patient_middle_name</th>
+                    <th scope="col">patient_last_name</th>
+                    <th scope="col">pref_name</th>
+                    <th scope="col">social</th>
+                    <th scope="col">dob</th>
+                    <th scope="col">m_address</th>
+                    <th scope="col">city</th>
+                    <th scope="col">state</th>
+                    <th scope="col">zip</th>
+                    <th scope="col">status</th>
+                    <th scope="col">sex</th>
+                </tr>
+        
+                {% for result in results %}
+                <tr>
+                    <th scope="row">index</th>
+                    <!--add ndex-->
+                    <td>{{ result.patient_id }}</td>
+                    <td>{{ result.patient_first_name }}</td>
+                    <td>{{ result.patient_middle_name }}</td>
+                    <td>{{ result.patient_last_name }}</td>
+                    <td>{{ result.pref_name }}</td>
+                    <td>{{ result.social }}</td>
+                    <td>{{ result.dob }}</td>
+                    <td>{{ result.m_address }}</td>
+                    <td>{{ result.city }}</td>
+                    <td>{{ result.state }}</td>
+                    <td>{{ result.zip }}</td>
+                    <td>{{ result.status }}</td>
+                    <td>{{ result.sex }}</td>
+                </tr>
+                {% endfor %}
+                
+            </table>
+        </div>
+        <form action="/getCSV" method="POST">
+            <div class="panel-body">
+                <input type ="submit" name="action" value="download">
+            </div>
+        </form>
+    </body>
+</html>
+<!--
+{% for result in results %}
+<p>{{result.patient_first_name}}</p>
+{% endfor %}
+</body>
+</html>
+-->

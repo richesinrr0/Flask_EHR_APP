@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="pt-5 pb-2">Data Management System</h1>
+
+    <p>Please enter the first and last name of the patient you would like to access</p>
+
+
+
+    <form method="POST" action="/data/">
+        <input type="text" name="first_name"/>
+        <input type="text" name="last_name"/>
+        <input type="submit" name="action" value="submit"/>
+
+        <p>Or click here to see all patients</p>
+        <input type="submit" name="action" value="see all"/>
+    </form>
+
+
+</body>
+</html>
