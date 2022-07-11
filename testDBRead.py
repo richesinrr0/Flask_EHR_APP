@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 import sqlite3
+from pathlib import Path
 
 
 app = Flask(__name__)
@@ -35,6 +36,8 @@ class EHR(db.Model):
     status = db.Column(db.String)
     sex = db.Column(db.String)
 
+first_name, last_name = '',''
+
 @app.route('/form')
 def form():
     return render_template('index.html')
@@ -42,23 +45,26 @@ def form():
 
 @app.route('/data/', methods = ['POST', 'GET'])
 def data():
+    global first_name
+    global last_name
     try:
-        #records = EHR.query.filter(EHR.patient_first_name==name, EHR.patient_last_name==lname).all()
         if request.method == 'GET':
             return f"The URL /data is accessed directly. Try going to '/form' to submit form"
         if request.method == 'POST':
             if request.form['action'] == 'submit':
                 form_data = request.form
+                first_name, last_name = form_data['first_name'], form_data['last_name']
                 results = EHR.query.filter(EHR.patient_first_name==form_data['first_name'], EHR.patient_last_name==form_data['last_name']).all()
-            
-                return render_template('displayData.html', results = results)
+                len_results = range(len(results))
+                return render_template('displayData.html', results = zip(len_results,results),all='Download')
             elif request.form['action'] == 'see all':
                 results = EHR.query.filter().all()
-                return render_template('displayData.html', results = results)
+                len_results = range(len(results))
+                return render_template('displayData.html', results = zip(len_results,results),all='download')
  
     except Exception as e:
         # e holds description of the error
-        error_text = "<p>The error:<br>" + str(e) + "</p>"
+        error_text = '<p>The error:<br>' + str(e) + '</p>'
         hed = '<h1>Something is broken.</h1>'
         return hed + error_text
 
@@ -71,6 +77,7 @@ def get_csv():
         if request.method == 'POST':
             
             if request.form['action'] == 'download':
+                
                 conn = sqlite3.connect('test_database') 
                 c = conn.cursor()
                 c.execute('''
@@ -78,7 +85,21 @@ def get_csv():
                 ''')
                 df = pd.DataFrame(c.fetchall(), columns=['patient_id', 'patient_first_name', 'patient_middle_name', 'patient_last_name',
                         'pref_name', 'social', 'dob', 'm_address', 'city', 'state', 'zip', 'status', 'sex'])
+                downloads_path = str(Path.home() / 'Downloads')
+                #df.to_csv(downloads_path + '/EHRTable.csv')
                 df.to_csv('/Users/rossrichesin/Desktop/EHRTable.csv')
+                return ('', 204)
+            else:
+                conn = sqlite3.connect('test_database') 
+                c = conn.cursor()
+                c.execute(
+                f'SELECT * FROM EHR WHERE patient_first_name == "{first_name}" and patient_last_name == "{last_name}"'
+                )
+                df = pd.DataFrame(c.fetchall(), columns=['patient_id', 'patient_first_name', 'patient_middle_name', 'patient_last_name',
+                        'pref_name', 'social', 'dob', 'm_address', 'city', 'state', 'zip', 'status', 'sex'])
+                downloads_path = str(Path.home() / 'Downloads')
+                df.to_csv('/Users/rossrichesin/Desktop/EHRTable.csv')
+                #df.to_csv(downloads_path + '/EHRTable.csv')
                 return ('', 204)
 
     except Exception as e:
