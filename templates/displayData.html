@@ -6,63 +6,77 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='DataTables/datatables.css') }}">
+        
         <title>Query Table</title>
     </head>
     <body>
         <h2>Search results</h2>
 
         <div>
-            <table>
-                <tr>
-                    <th>&nbsp;</th>
-                    <th scope="col">patient_id</th>
-                    <th scope="col">patient_first_name</th>
-                    <th scope="col">patient_middle_name</th>
-                    <th scope="col">patient_last_name</th>
-                    <th scope="col">pref_name</th>
-                    <th scope="col">social</th>
-                    <th scope="col">dob</th>
-                    <th scope="col">m_address</th>
-                    <th scope="col">city</th>
-                    <th scope="col">state</th>
-                    <th scope="col">zip</th>
-                    <th scope="col">status</th>
-                    <th scope="col">sex</th>
-                </tr>
-        
-                {% for idx,result in results: %}
-                <tr>
-                    <th scope="row">{{ idx }}</th>
-                    <td>{{ result.patient_id }}</td>
-                    <td>{{ result.patient_first_name }}</td>
-                    <td>{{ result.patient_middle_name }}</td>
-                    <td>{{ result.patient_last_name }}</td>
-                    <td>{{ result.pref_name }}</td>
-                    <td>{{ result.social }}</td>
-                    <td>{{ result.dob }}</td>
-                    <td>{{ result.m_address }}</td>
-                    <td>{{ result.city }}</td>
-                    <td>{{ result.state }}</td>
-                    <td>{{ result.zip }}</td>
-                    <td>{{ result.status }}</td>
-                    <td>{{ result.sex }}</td>
-                </tr>
-                {% endfor %}
+            <table id="data" class="display">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th scope="col">patient_id</th>
+                        <th scope="col">patient_first_name</th>
+                        <th scope="col">patient_middle_name</th>
+                        <th scope="col">patient_last_name</th>
+                        <th scope="col">pref_name</th>
+                        <th scope="col">social</th>
+                        <th scope="col">dob</th>
+                        <th scope="col">m_address</th>
+                        <th scope="col">city</th>
+                        <th scope="col">state</th>
+                        <th scope="col">zip</th>
+                        <th scope="col">status</th>
+                        <th scope="col">sex</th>
+                    </tr>
+                </thead>
                 
+                <tbody>
+                    {% for idx,result in results: %}
+                    <tr>
+                        <th scope="row">{{ idx }}</th>
+                        <td>{{ result.patient_id }}</td>
+                        <td>{{ result.patient_first_name }}</td>
+                        <td>{{ result.patient_middle_name }}</td>
+                        <td>{{ result.patient_last_name }}</td>
+                        <td>{{ result.pref_name }}</td>
+                        <td>{{ result.social }}</td>
+                        <td>{{ result.dob }}</td>
+                        <td>{{ result.m_address }}</td>
+                        <td>{{ result.city }}</td>
+                        <td>{{ result.state }}</td>
+                        <td>{{ result.zip }}</td>
+                        <td>{{ result.status }}</td>
+                        <td>{{ result.sex }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
+       
         </div>
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='/DataTables/datatables.js') }}"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#data').DataTable({
+                    searching: true
+                });
+            });
+        </script>
+        
         <form action="/getCSV" method="POST">
             <div class="panel-body">
-                <input type ="submit" name="action" value={{ all }}>
+                <input type ="submit" id="download" name="action" value={{ all }}>
             </div>
         </form>
+        
     </body>
 </html>
-<!--
-{% for result in results %}
-<p>{{result.patient_first_name}}</p>
-{% endfor %}
-</body>
-</html>
--->
+
+

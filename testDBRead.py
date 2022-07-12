@@ -55,11 +55,11 @@ def data():
                 form_data = request.form
                 first_name, last_name = form_data['first_name'], form_data['last_name']
                 results = EHR.query.filter(EHR.patient_first_name==form_data['first_name'], EHR.patient_last_name==form_data['last_name']).all()
-                len_results = range(len(results))
-                return render_template('displayData.html', results = zip(len_results,results),all='Download')
+                len_results = range(len(results)+1)
+                return render_template('displayDataF.html', results = zip(len_results,results),all='\u00A0download\u00A0')
             elif request.form['action'] == 'see all':
                 results = EHR.query.filter().all()
-                len_results = range(len(results))
+                len_results = range(len(results)+1)
                 return render_template('displayData.html', results = zip(len_results,results),all='download')
  
     except Exception as e:
