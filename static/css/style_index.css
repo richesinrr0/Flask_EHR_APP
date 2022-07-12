@@ -1,0 +1,93 @@
+/* <div class="split left" is two classes "split" and "left" 
+
+.left,.right { the , means 'or' and .left.right { means 'and'
+
+    What is the difference between position fixed and absolute?
+Whereas the position and dimensions of an element with position:absolute are relative to its 
+containing block, the position and dimensions of an element with position:fixed are always relative 
+to the initial containing block. This is normally the viewport: the browser window or the paper's page box
+
+to select a html element, the css selector is without a dot, if you need to select a class, you use the dot.
+
+use box-sizing: boder-box to keep container the same size when padding
+  width: 300px;
+  padding: 25px;
+  box-sizing: border-box;
+
+*/
+
+
+
+.left,.right,.left-bottom {
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.left {
+    top: 65px;
+    height: 50%;
+    left: 0;
+    background-color: rgb(242,242,242);
+}
+.right {
+    top: 65px;
+    height: 100%;
+    right: 0;
+    background-color: rgb(205, 223, 223);  
+}
+
+.left-bottom {
+    height: 50%;
+
+    left: 0;
+    top: 55%;
+
+    background-color: rgb(232, 249, 166);
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+
+body {
+    padding: 0;
+    overflow: hidden;
+    margin:0;
+}
+  
+.top-banner {
+    position:relative; /*fixed*/
+    top: 0;
+    left:0;
+    height: 65px;
+    width: 100%;
+    background-color: rgb(161, 165, 174);
+}
+
+.top-banner-text {
+    position: absolute;
+
+    width: 25%;
+    height: 65px;
+    padding: 10px;
+    box-sizing: border-box;
+    right:0;
+    text-align: center;
+    background-color: rgba(91, 98, 219, 0.111);
+}
+.top-banner-img {
+    position: absolute;
+    background-color: rgb(212, 194, 205);
+    padding: 10px;
+    box-sizing: border-box;
+    height: 65px;
+    left:20px;
+}
+
+
