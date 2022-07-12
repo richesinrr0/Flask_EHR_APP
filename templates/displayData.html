@@ -13,7 +13,7 @@
         <title>Query Table</title>
     </head>
     <body>
-        <h2>Search results</h2>
+        <h2>All Results</h2>
 
         <div>
             <table id="data" class="display">
@@ -65,7 +65,8 @@
         <script>
             $(document).ready(function () {
                 $('#data').DataTable({
-                    searching: true
+                    searching: true,
+                    ordering: false
                 });
             });
         </script>

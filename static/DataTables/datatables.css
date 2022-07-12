@@ -16,6 +16,42 @@ table.dataTable td.dt-control {
   text-align: center;
   cursor: pointer;
 }
+
+/*me*/
+body {
+  padding: 10px; /*14*/
+  text-align: center;
+}
+
+#download {
+  background-color: rgb(213,213,213);
+  padding: .3em;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  font-family: serif;
+  font-size:18px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px #999;
+ }
+ #download:hover {
+  border: none;
+  background: rgb(205, 223, 223);
+  /*box-shadow: 0px 0px 1px #777;*/
+ }
+ #download:active {
+  background-color: rgb(186, 224, 224);
+  box-shadow: 0 2px #777;
+  transform: translateY(3px);
+}
+
+
+
+
+
 table.dataTable td.dt-control:before {
   height: 1em;
   width: 1em;
@@ -36,6 +72,11 @@ table.dataTable td.dt-control:before {
 table.dataTable tr.dt-hasChild td.dt-control:before {
   content: "-";
   background-color: #d33333;
+}
+
+/*me*/
+th {
+  background-color: rgb(205, 223, 223);
 }
 
 table.dataTable thead > tr > th.sorting, table.dataTable thead > tr > th.sorting_asc, table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting_asc_disabled, table.dataTable thead > tr > th.sorting_desc_disabled,
@@ -276,6 +317,10 @@ table.dataTable thead th,
 table.dataTable thead td {
   padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  /*me*/
+  border-right: solid 1px rgba(0, 0, 0, 0.2); 
+  border-left: solid 1px rgba(0, 0, 0, 0.2);
+
 }
 table.dataTable thead th:active,
 table.dataTable thead td:active {
@@ -288,6 +333,10 @@ table.dataTable tfoot td {
 }
 table.dataTable tbody tr {
   background-color: transparent;
+  /*me
+  border-right: solid 1px rgba(0, 0, 0, 0.3); 
+  border-left: solid 1px rgba(0, 0, 0, 0.15);
+  */
 }
 table.dataTable tbody tr.selected > * {
   box-shadow: inset 0 0 0 9999px rgba(13, 110, 253, 0.9);
@@ -299,11 +348,15 @@ table.dataTable tbody td {
 }
 table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.dataTable.display tbody th, table.dataTable.display tbody td {
   border-top: 1px solid rgba(0, 0, 0, 0.15);
+  /*me*/
+  border-right: solid 1px rgba(0, 0, 0, 0.15); 
+  border-left: solid 1px rgba(0, 0, 0, 0.15);
 }
 table.dataTable.row-border tbody tr:first-child th,
 table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th,
 table.dataTable.display tbody tr:first-child td {
-  border-top: none;
+  border-top: none; /*me  */
+
 }
 table.dataTable.cell-border tbody th, table.dataTable.cell-border tbody td {
   border-top: 1px solid rgba(0, 0, 0, 0.15);
